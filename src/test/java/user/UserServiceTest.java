@@ -29,7 +29,8 @@ public class UserServiceTest {
                 .id(1L)
                 .username("superadmin")
                 .password("password")
-                .role(ADMIN).build();
+                .role(ADMIN)
+                .build();
 
         final long randomId = 1 + Math.abs(random.nextLong());
 
