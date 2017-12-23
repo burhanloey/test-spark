@@ -23,4 +23,14 @@ public class UserDaoStub implements UserDao {
 
         return Optional.empty();
     }
+
+    @Override
+    public Optional<User> fetchOne(String username) {
+        return Optional.empty();
+    }
+
+    @Override
+    public void insert(User user) {
+
+    }
 }

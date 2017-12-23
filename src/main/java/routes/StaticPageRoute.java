@@ -11,6 +11,7 @@ import java.util.regex.Pattern;
 
 import static java.lang.Long.parseLong;
 import static spark.Spark.get;
+import static spark.Spark.post;
 
 public class StaticPageRoute {
 
@@ -31,17 +32,31 @@ public class StaticPageRoute {
     public void init() {
         get("/", (req, res) -> cache.get("/", k -> "Hello World!"));
 
-        get("/user/:id", (req, res) -> {
+        get("/user/:param", (req, res) -> {
             res.type("application/json");
 
-            final String idParam = req.params(":id");
-            if (!integerRegex.matcher(idParam).matches()) {
-                return User.empty();
+            final String param = req.params(":param");
+            if (integerRegex.matcher(param).matches()) {
+                final long id = parseLong(param);
+                return cache.get("/user/" + id, k -> userService.getUser(id).orElse(User.empty()));
             }
 
-            final long id = parseLong(idParam);
-            return cache.get("/user/" + id, k -> userService.getUser(id).orElse(User.empty()));
+            return cache.get("/user/" + param, k -> userService.getUser(param).orElse(User.empty()));
         }, gson::toJson);
+
+        post("/user", "application/json", (req, res) -> {
+            final User user = gson.fromJson(req.body(), User.class);
+
+            return userService.getUser(user.getUsername())
+                    .map(it -> {
+                        res.status(409);
+                        return "Username taken";
+                    })
+                    .orElseGet(() -> {
+                        userService.add(user);
+                        return "Registered";
+                    });
+        });
     }
 
 }

@@ -20,4 +20,14 @@ public class DefaultUserService implements UserService {
     public Optional<User> getUser(final long id) {
         return userDao.fetchOne(id);
     }
+
+    @Override
+    public Optional<User> getUser(final String username) {
+        return userDao.fetchOne(username);
+    }
+
+    @Override
+    public void add(final User user) {
+        userDao.insert(user);
+    }
 }

@@ -27,4 +27,21 @@ public class DefaultUserDao implements UserDao {
                 .map(userMapper)
                 .findFirst());
     }
+
+    @Override
+    public Optional<User> fetchOne(final String username) {
+        return jdbi.withHandle(handle -> handle
+                .createQuery("select * from users where username = :username")
+                .bind("username", username)
+                .map(userMapper)
+                .findFirst());
+    }
+
+    @Override
+    public void insert(final User user) {
+        jdbi.useHandle(handle -> handle
+                .createUpdate("insert into users (username, password, role) values (:username, :password, :role)")
+                .bindBean(user)
+                .execute());
+    }
 }
