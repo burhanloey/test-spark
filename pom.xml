@@ -23,8 +23,8 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>3.0.5</version>
                 <configuration>
-                    <changeLogFile>src/main/resources/liquibase/changelog/db.changelog-master.xml</changeLogFile>
-                    <propertyFile>src/main/resources/liquibase/liquibase.properties</propertyFile>
+                    <changeLogFile>liquibase/changelog/db.changelog-master.xml</changeLogFile>
+                    <propertyFile>liquibase/liquibase.properties</propertyFile>
                 </configuration>
                 <executions>
                     <execution>

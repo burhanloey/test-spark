@@ -37,7 +37,7 @@ public class ProviderModule extends AbstractModule{
 
     @Provides @Singleton
     DataSource provideDataSource() {
-        HikariConfig config = new HikariConfig("src/main/resources/hikari/hikari.properties");
+        HikariConfig config = new HikariConfig("/hikari/hikari.properties");
         config.setJdbcUrl("jdbc:mysql://localhost:3306/test_spark?useSSL=false");
         return new HikariDataSource(config);
     }
