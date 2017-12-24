@@ -3,6 +3,10 @@ package user;
 import lombok.Builder;
 import lombok.Data;
 
+import java.util.Arrays;
+import java.util.Set;
+
+import static java.util.Collections.singleton;
 import static user.Role.ANONYMOUS;
 
 @Data
@@ -11,11 +15,15 @@ public class User {
     private final Long id;
     private final String username;
     private final String password;
-    private final Role role;
+    private final Set<Role> roles;
+
+    public boolean hasRoles(final Role... roles) {
+        return this.roles.containsAll(Arrays.asList(roles));
+    }
 
     public static User getAnonymous() {
         return User.builder()
-                .role(ANONYMOUS)
+                .roles(singleton(ANONYMOUS))
                 .build();
     }
 

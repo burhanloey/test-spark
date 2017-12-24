@@ -15,7 +15,7 @@ public class UserDaoStub implements UserDao {
                     .id(1L)
                     .username("superadmin")
                     .password("password")
-                    .role(ADMIN)
+//                    .role(ADMIN)
                     .build();
 
             return Optional.of(admin);
