@@ -17,6 +17,10 @@ public class User {
     private final String password;
     private final Set<Role> roles;
 
+    public boolean hasAnyRole(final Role... roles) {
+        return Arrays.stream(roles).anyMatch(this.roles::contains);
+    }
+
     public boolean hasRoles(final Role... roles) {
         return this.roles.containsAll(Arrays.asList(roles));
     }
