@@ -14,6 +14,7 @@ public class UserMapper {
 
     private static Set<Role> collectRoles(final List<Map<String, Object>> results) {
         return results.stream()
+                .filter(it -> it.containsKey("role"))
                 .map(it -> {
                     final String role = (String) it.get("role");
                     return Role.valueOf(role);
