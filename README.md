@@ -13,7 +13,7 @@ Boilerplate code when trying out Spark Framework
 * **Gson** - Nicer API.
 * **Caffeine** - Was part of Guava, so...
 * **HikariCP** - Must have for any database-backed app.
-* **Junit** - Duh.
+* **JUnit** - Duh.
 * **SLF4J** - Spark Framework's default.
 
 ## Known issues
