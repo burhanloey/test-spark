@@ -42,6 +42,11 @@ public class DefaultUserDao implements UserDao {
                     .mapTo(Long.class)
                     .findOnly();
 
+            // TODO: Add test for null roles
+            if (user.getRoles() == null) {
+                return;
+            }
+
             user.getRoles().forEach(role -> {
                 handle.createUpdate("insert into user_role (user_id, role) values (:user_id, :role)")
                         .bind("user_id", id)
