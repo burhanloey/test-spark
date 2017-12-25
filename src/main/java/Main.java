@@ -1,7 +1,7 @@
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 import provider.ProviderModule;
-import routes.StaticPageRoute;
+import routes.UserApiRoute;
 import user.UserModule;
 
 import static spark.Spark.port;
@@ -11,6 +11,6 @@ public class Main {
         port(3000);
 
         Injector app = Guice.createInjector(new UserModule(), new ProviderModule());
-        app.getInstance(StaticPageRoute.class).init();
+        app.getInstance(UserApiRoute.class).init();
     }
 }
