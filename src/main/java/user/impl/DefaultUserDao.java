@@ -20,19 +20,6 @@ public class DefaultUserDao implements UserDao {
     }
 
     @Override
-    public Optional<User> fetchOne(final long id) {
-        final List<Map<String, Object>> results = jdbi.withHandle(handle -> handle
-                .createQuery("select * from users " +
-                        "left join user_role on users.id = user_role.user_id " +
-                        "where users.id = :id")
-                .bind("id", id)
-                .mapToMap()
-                .list());
-
-        return UserMapper.fold(results);
-    }
-
-    @Override
     public Optional<User> fetchOne(final String username) {
         final List<Map<String, Object>> results = jdbi.withHandle(handle -> handle
                 .createQuery("select * from users " +

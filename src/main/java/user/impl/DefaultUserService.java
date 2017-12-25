@@ -17,11 +17,6 @@ public class DefaultUserService implements UserService {
     }
 
     @Override
-    public Optional<User> getUser(final long id) {
-        return userDao.fetchOne(id);
-    }
-
-    @Override
     public Optional<User> getUser(final String username) {
         return userDao.fetchOne(username);
     }
