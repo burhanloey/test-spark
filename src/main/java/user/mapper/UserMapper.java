@@ -11,6 +11,16 @@ import java.util.Set;
 import static java.util.stream.Collectors.toSet;
 
 public class UserMapper {
+
+    private static Set<Role> collectRoles(final List<Map<String, Object>> results) {
+        return results.stream()
+                .map(it -> {
+                    final String role = (String) it.get("role");
+                    return Role.valueOf(role);
+                })
+                .collect(toSet());
+    }
+
     /**
      * Fold results of users and user_role join query into User object with one-to-many relationship with Role,
      * wrapped in Optional.
@@ -23,12 +33,7 @@ public class UserMapper {
             return Optional.empty();
         }
 
-        final Set<Role> roles = results.stream()
-                .map(it -> {
-                    final String role = (String) it.get("role");
-                    return Role.valueOf(role);
-                })
-                .collect(toSet());
+        final Set<Role> roles = collectRoles(results);
 
         final Map<String, Object> anyResult = results.get(0);
 
